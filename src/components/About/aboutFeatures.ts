@@ -1,7 +1,7 @@
 import { LibraryBig, ClipboardCheck, History, UserCog } from 'lucide-react'
 import React from 'react'
 
-interface AboutFeature {
+type AboutFeature = {
   Icon: React.ElementType
   title: String
   description: String
