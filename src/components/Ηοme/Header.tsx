@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Menu, X,  Home, Info, Mail } from'lucide-react'
+import { useLocation } from "react-router-dom"
 import Navbar from "../Navbar"
 import NavLink from "../NavLink"
 
@@ -7,6 +8,12 @@ import NavLink from "../NavLink"
 const Header = () => {
   const [nav, setNav] = useState(false)
   
+  const location = useLocation()
+
+  useEffect(() => {
+    setNav(false);
+  }, [location.pathname])
+
   return(
     <Navbar>
 
@@ -16,22 +23,22 @@ const Header = () => {
         }
       </button>
        
-      <div className={`text-dark-blue font-bold text-lg h-[88vh] fixed top-[80px] flex flex-col pt-10   
+      <div className={`text-dark-blue font-bold text-lg bottom-0 fixed top-[64px] flex flex-col pt-10   
               space-y-12 items-center w-48 sm:hidden bg-light-blue z-50 duration-1000 
                ${ nav ? "right-[0px]" : "right-[-100vw]"} `}>
-          <NavLink href="/">
+          <NavLink to="/">
             <span className="flex items-center gap-2">
               <Home size={22} />
                 Home
             </span>
           </NavLink>
-          <NavLink href="/about">
+          <NavLink to="/about">
             <span className="flex items-center gap-2">
               <Info size={22} />
               About
             </span>
           </NavLink>
-          <NavLink href="/contact">
+          <NavLink to="/contact">
             <span className="flex items-center gap-2">
               <Mail size={22} />
               Contact us
@@ -40,9 +47,9 @@ const Header = () => {
       </div>
 
       <div className='hidden sm:flex space-x-14 text-lg text-dark-blue font-bold '>
-        <NavLink href="/">Home</NavLink>
-        <NavLink href="/about">About</NavLink>
-        <NavLink href="/contact">Contact Us</NavLink>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/about">About</NavLink>
+        <NavLink to="/contact">Contact Us</NavLink>
       </div>
   
     </Navbar>
