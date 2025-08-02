@@ -9,7 +9,7 @@ const Header = () => {
   const [nav, setNav] = useState(false)
   
   const location = useLocation()
-
+ 
   useEffect(() => {
     setNav(false);
   }, [location.pathname])
