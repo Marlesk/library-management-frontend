@@ -1,16 +1,17 @@
 import React from "react"
+import { Link } from "react-router-dom";
 
 interface Props {
-  href: string;
+  to: string;
   children: React.ReactNode
 }
 
 
-const NavLink = ({ href, children}: Props) => {
+const NavLink = ({ to, children}: Props) => {
   return (
-    <a href={href} className="hover:text-semi-blue cursor-pointer ">
+    <Link to={to} className="hover:text-semi-blue cursor-pointer ">
       {children}
-    </a>
+    </Link>
   )
 }
 
