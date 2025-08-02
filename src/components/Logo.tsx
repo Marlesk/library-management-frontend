@@ -1,6 +1,6 @@
 const Logo = () => {
   return (
-    <img src='/logo.png' className = "w-18"  alt="Logo"></img>
+    <img src='/logo.png' className = "h-16 w-auto"  alt="Logo"></img>
   )
 }
 
