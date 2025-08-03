@@ -1,35 +1,40 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import About from './components/About/AboutSection'
-import Footer from './components/Footer'
-import Header from './components/Ηοme/Header'
-import Main from './components/Ηοme/Main'
+import Main from './components/Home/Main'
 import ContactPage from './components/Contact/ContactPage'
 import RegisterPage from './components/Register/RegistrerPage'
 import LoginPage from './components/Login/LoginPage'
+import BookPage from './components/Users/Books/BookPage'
+import Footer from './components/Footer'
+import DefaultLayout from './components/DefaultLayout'
 
 function App() {
  
   return (
     <>
       <BrowserRouter>
-        <Header/>
+        
         <Routes>
-          <Route path="/" element={<Main/>}/>
-          <Route path="about" element={<About/>}/>
-          <Route path="contact" element={<ContactPage/>}/>
-          <Route path="users">
-            <Route path="register" element={<RegisterPage/>}/>
+          <Route element={<DefaultLayout/>}>
+            <Route path="/" element={<Main/>}/>
+            <Route path="about" element={<About/>}/>
+            <Route path="contact" element={<ContactPage/>}/>
+            <Route path="users">
+              <Route path="register" element={<RegisterPage/>}/>
+            </Route>
+            <Route path="auth">
+              <Route path="login" element={<LoginPage/>}/>
+            </Route>  
           </Route>
-          <Route path="auth">
-            <Route path="login" element={<LoginPage/>}/>
-          </Route>
-        </Routes>
-        
-          
-        
+    
+          <Route path="books" element={<BookPage/>}/>
+        </Routes>  
+
+      
       </BrowserRouter>
-      <Footer/> 
+
+      <Footer/>
     </>
   )
 }
