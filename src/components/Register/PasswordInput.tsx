@@ -38,7 +38,7 @@ const PasswordInput = ({label, id, register, error} : PasswordInputProps) => {
         {show ? <Eye size={20} /> : <EyeOff size={20} />}
         </button>
       </div>
-      {error && <p className="text-red-800 text-sm ml-2">{error.message}</p>}
+      {error && <p className="text-red-800 text-sm ml-2 mt-1">{error.message}</p>}
     </div>
       
   )

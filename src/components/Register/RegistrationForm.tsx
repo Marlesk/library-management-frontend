@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast, Toaster } from 'sonner'
-import TextInput from "./TextInput"
+import RegisterInput from "./RegisterInput"
 import { registerSchema, type registerValues } from './registerSchema'
 import PasswordInput from "./PasswordInput"
 import RegisterButton from "./RegisterButton"
@@ -52,14 +52,13 @@ const RegistrationForm = () => {
       const result = await res.json()
 
       if (!res.ok) {
-        const msg = result.message || ""
-
-        if (msg.toLowerCase().includes("email")) {
-          setError("email", { type: "manual", message: msg })
-        } else if (msg.toLowerCase().includes("username")) {
-          setError("username", { type: "manual", message: msg })
-        } else {
-          toast.error(result.message || "Registration failed")
+         if (result.errors) {
+          for (const key in result.errors) {
+            setError(key as keyof registerValues, {
+              type: "manual",
+              message: result.errors[key],
+            })
+          }
         }
       } else {
         toast.success('Account created successfully')
@@ -74,7 +73,7 @@ const RegistrationForm = () => {
   return (
     <>
       <form className="space-y-5" onSubmit={handleSubmit(onSubmit)} noValidate>
-        <TextInput
+        <RegisterInput
           id="firstname"
           label="First Name"
           placeholder="First Name"
@@ -83,7 +82,7 @@ const RegistrationForm = () => {
           inputRef={inputRef}
         />
 
-        <TextInput
+        <RegisterInput
             id="lastname"
             label="Last Name"
             placeholder="Last Name"
@@ -91,7 +90,7 @@ const RegistrationForm = () => {
             error={errors.lastname}
           />
 
-          <TextInput
+          <RegisterInput
             id="email"
             label="Email"
             placeholder="Email"
@@ -100,7 +99,7 @@ const RegistrationForm = () => {
             type="email"
           />
 
-          <TextInput
+          <RegisterInput
             id="username"
             label="Username"
             placeholder="Username"
