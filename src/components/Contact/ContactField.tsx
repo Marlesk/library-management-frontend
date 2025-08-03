@@ -23,26 +23,26 @@ const ContactField = ({ icon, type, placeholder, register, error, inputRef, isTe
               placeholder={placeholder}
               className="w-full bg-transparent outline-none placeholder:text-gray-500"
               {...register}
-              ref={(e) => {
-                register.ref(e)
-                if (inputRef && e) inputRef.current = e
+              ref={(el) => {
+                register.ref(el)
+                if (inputRef && el) inputRef.current = el
               }}
             /> 
           </div>
-          {error && <p className="text-red-800 text-sm ml-2">{error.message}</p>}
+          {error && <p className="text-red-800 text-sm ml-2 mt-1">{error.message}</p>}
         </div> 
 
         :
 
         <div className="space-y-1">
-          <div className="w-full bg-light-blue rounded-3xl px-4 py-3 border-2 border-gray-300 rounded-lg focus-within:border-dark-blue">
+          <div className="w-full bg-light-blue px-4 py-3 border-2 border-gray-300 rounded-lg focus-within:border-dark-blue">
             <textarea
               placeholder={placeholder}
               className="w-full h-40 resize-none bg-transparent outline-none placeholder:text-gray-500"
               {...register}
             ></textarea>
           </div>
-          {error && <p className="text-red-800 text-sm ml-2">{error.message}</p>}
+          {error && <p className="text-red-800 text-sm ml-2 mt-1">{error.message}</p>}
         </div>
       }
     </>
