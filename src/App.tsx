@@ -1,13 +1,18 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import About from './components/About/AboutSection'
-import Main from './components/Home/Main'
-import ContactPage from './components/Contact/ContactPage'
-import RegisterPage from './components/Register/RegistrerPage'
-import LoginPage from './components/Login/LoginPage'
-import BookPage from './components/Users/Books/BookPage'
+import About from './components/public/about/AboutSection'
+import Main from './components/public/home/Main'
+import ContactPage from './components/public/contact/ContactPage'
+import RegisterPage from './components/public/register/RegistrerPage'
+import LoginPage from './components/public/login/LoginPage'
+import BooksPage from './components/user/books/BooksPage'
 import Footer from './components/Footer'
-import DefaultLayout from './components/DefaultLayout'
+import DefaultLayout from './components/public/DefaultLayout'
+import UserLayout from './components/user/UserLayout'
+import BookDetailsPage from './components/user/books/BookDetailsPage'
+import ProtectedRoute from './components/ProtectedRoute'
+import ProfilePage from './components/user/profile/ProfilePage'
+import BookHistoryPage from './components/user/history/BookHistoryPage'
 
 function App() {
  
@@ -27,8 +32,32 @@ function App() {
               <Route path="login" element={<LoginPage/>}/>
             </Route>  
           </Route>
-    
-          <Route path="books" element={<BookPage/>}/>
+
+          <Route element={<UserLayout/>}>
+            <Route path="books" element={
+              <ProtectedRoute>
+                <BooksPage/>
+              </ProtectedRoute>
+            }/>
+              
+            <Route path="books/title/:title" element={
+               <ProtectedRoute>
+                <BookDetailsPage/>
+               </ProtectedRoute>
+            }/>
+
+            <Route path="users/profile" element={
+               <ProtectedRoute>
+                <ProfilePage/>
+               </ProtectedRoute>
+            }/>
+
+            <Route path="/borrows" element={
+              <ProtectedRoute>
+              <BookHistoryPage/>
+              </ProtectedRoute>
+            }/>
+          </Route>
         </Routes>  
 
       
