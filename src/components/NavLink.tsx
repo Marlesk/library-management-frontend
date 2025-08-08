@@ -9,7 +9,7 @@ interface Props {
 
 const NavLink = ({ to, children}: Props) => {
   return (
-    <Link to={to} className="hover:text-semi-blue cursor-pointer ">
+    <Link to={to} className="hover:text-semi-blue cursor-pointer">
       {children}
     </Link>
   )
