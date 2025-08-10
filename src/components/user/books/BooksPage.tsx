@@ -1,5 +1,5 @@
 import { toast, Toaster } from "sonner"
-import { getBookByTitle, getBooks } from "./books"
+import { getBooks } from "./books"
 import { useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { BooksPagination } from "./BooksPagination"
@@ -40,10 +40,6 @@ const BooksPage = () => {
       })
   }, [])
 
-  useEffect(() => {
-    getBookByTitle(title)
-  }, [title])
-
   if (loading) {
     return <div className="text-center py-20 text-gray-600 min-h-screen">Loading books...</div>
   }
@@ -71,7 +67,7 @@ const BooksPage = () => {
  return (
     <>
       <div className="px-6 text-center">
-        <h1 className="text-3xl font-bold text-dark-blue mb-2 mt-10 md:mt-0">Explore the Library</h1>
+        <h1 className="text-3xl font-bold text-dark-blue mb-2 mt-14 md:mt-10">Explore the Library</h1>
         <p className="text-gray-800 leading-relaxed max-w-prose mx-auto">Click on a book to learn more</p>
         <div className="mt-6 flex justify-center">
           <div className="relative md:w-full w-80 max-w-md">

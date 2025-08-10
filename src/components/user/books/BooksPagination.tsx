@@ -22,7 +22,7 @@ export function BooksPagination({ currentPage, totalPages, goToPage }: Props) {
   )
 
   return (
-    <Pagination className="mb-5">
+    <Pagination className="mb-10">
       <PaginationContent className="flex gap-2">
         <PaginationItem>
           <PaginationPrevious
