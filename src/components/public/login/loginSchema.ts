@@ -13,4 +13,9 @@ export const loginSchema = z.object({
 
 export type loginValues=z.infer<typeof loginSchema>
 
+export type JWTPayload = {
+  role: string
+  exp: number
+}
+
 

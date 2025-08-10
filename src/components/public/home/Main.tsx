@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const Main = () => {
   return (
     <div className="flex flex-col-reverse md:flex-row h-auto md:h-screen px-6 md:px-8 py-12 md:py-0">
-      <div className="w-full md:w-1/2 flex flex-col justify-center space-y-6 md:pr-8 text-center">
+      <div className="w-full md:w-1/2 flex flex-col justify-center space-y-6 md:pr-8 text-center mb-10">
         <h1 className="text-4xl md:text-5xl font-bold text-dark-blue">
           Discover, Borrow, Read
         </h1>
@@ -22,7 +22,7 @@ const Main = () => {
         </div>
       </div>
 
-      <div className="w-full mt-12 md:mt-0 md:w-1/2 h-64 md:h-auto bg-[url('/bg-1.jpg')] bg-center md:bg-right bg-no-repeat bg-contain">
+      <div className="w-full md:mt-0 md:w-1/2 h-64 md:h-auto bg-[url('/bg-1.jpg')] bg-center md:bg-right bg-no-repeat bg-contain">
       </div>
     </div>
   )

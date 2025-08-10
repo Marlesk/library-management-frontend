@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form"
 import LoginButton from "./LoginButton"
 import LoginInput from "./LoginInput"
-import { loginSchema, type loginValues } from "./loginSchema"
+import { loginSchema, type JWTPayload, type loginValues } from "./loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast, Toaster } from "sonner"
 import { useEffect, useRef } from "react"
 import LoginPassword from "./LoginPassword"
 import { useNavigate } from "react-router-dom"
+import { jwtDecode } from "jwt-decode"
 
 const API_URL: string = import.meta.env.VITE_API_URL
 
@@ -35,7 +36,6 @@ const LoginForm = () => {
     mode: "onChange"
   })
 
-
   const onSubmit = async (data: loginValues) => {
     try {
       const res = await fetch(`${API_URL}/api/auth/login`, {
@@ -56,13 +56,18 @@ const LoginForm = () => {
           }
         }
       } else if (result.status) {
-        const token: string = result.data
+        const token = result.data
         localStorage.setItem('accessToken', token)
-        navigate('/books')
+
+        const decoded = jwtDecode<JWTPayload>(token)
+        if (decoded.role === 'admin') {
+          navigate('/admin/users')
+        } else {
+          navigate('/books')
+        }
       } else {
         toast.error('Login failed')
       }
-      
     } catch (error) {
       toast.error("Something went wrong. Please try again.")
     }

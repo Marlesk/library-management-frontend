@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { Menu, X,  Home, Info, Mail } from'lucide-react'
 import { useLocation } from "react-router-dom"
-import Navbar from "../Navbar"
-import NavLink from "../NavLink"
+import Navbar from "../../navbar/Navbar"
+import NavLink from "../../navbar/NavLink"
 
 
 const MainHeader = () => {
