@@ -1,48 +1,42 @@
 import { useEffect, useState } from "react";
 import { type BookHistory, getHistory } from "./histrory";
 import { Barcode, BookOpen, CheckCircle, Clock } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "sonner";
 import HistoryDates from "./HistoryDates";
+import LoadingMessage from "@/components/LoadingMessage";
+import ErrorMessage from "@/components/ErrorMessage";
+import PaginationHistory from "./PaginationHistory";
 
 const BookHistoryPage = () => {
   const [data, setData] = useState<BookHistory[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [filterStatus, setFilterStatus] = useState<'all' | 'requested' | 'borrowed' | 'returned'>('all')
+  const [currentPage, setCurrentPage] = useState(1)
 
-  const navigate = useNavigate()
+  const BOOKS_PER_PAGE = 10
 
   const filteredData = filterStatus === 'all' ? data : data.filter(entry => entry.status === filterStatus)
+
+  const totalPages = Math.ceil(filteredData.length / BOOKS_PER_PAGE)
+  const indexOfLastItem = currentPage * BOOKS_PER_PAGE
+  const indexOfFirstItem = indexOfLastItem - BOOKS_PER_PAGE
+  const paginatedBooks = filteredData.slice(indexOfFirstItem, indexOfLastItem)
 
   useEffect(() => {
     getHistory()
       .then((result) => {
-        if (result === "unauthorized") {
-          toast.error('Expired token. Login again')
-          navigate('/auth/login')
-          return 
-        }
         setData(result)
         setLoading(false)
       })
       .catch(() => { 
         setLoading(false)
-        setError("Failed to fetch books")
+        setError("Failed to fetch history")
       })
   }, [])
 
-  if (loading) {
-    return <p className="text-center py-6 text-gray-500 min-h-screen">Loading...</p>;
-  }
-
-   if (error) {
-    return (
-      <div className="text-center py-20 text-red-600 min-h-screen">
-        {error}
-      </div>
-    )
-  }
+  if (loading) return <LoadingMessage message="Loading history..."/>
+    
+  if (error) return <ErrorMessage error={error}/> 
 
   return (
     <>
@@ -62,12 +56,12 @@ const BookHistoryPage = () => {
           ))}
         </div>
         
-        {filteredData.length === 0 ? 
+        {paginatedBooks.length === 0 ? 
           (
             <p className="text-center py-6 text-gray-500 min-h-screen">No books found.</p>
           ) : 
           (
-            filteredData.map((entry) => ( 
+            paginatedBooks.map((entry) => ( 
               <div key={entry._id} className="bg-white shadow-lg rounded-xl p-6">
                 <div className="flex items-start space-x-5">
                   {entry.bookId.coverImage && (
@@ -106,8 +100,17 @@ const BookHistoryPage = () => {
             ))
           )
         }
+
+        <div className="ml-64">
+          {totalPages > 1 && (
+            <PaginationHistory 
+              totalPages={totalPages}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+            />
+          )}
+        </div>
       </div> 
-      <Toaster duration={3000} expand={true} richColors/> 
     </>
   )
 }

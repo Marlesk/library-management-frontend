@@ -17,16 +17,11 @@ export type BookHistory = {
 }
 
 
-export async function getHistory(): Promise<BookHistory[] | "unauthorized"> {
+export async function getHistory(): Promise<BookHistory[]> {
   const token = localStorage.getItem('accessToken')
   const res = await fetch(`${API_URL}/api/borrows`, {
     headers: { 'Authorization': `Bearer ${token}` }
   })
-
-  if (res.status === 401) {
-    localStorage.removeItem('accessToken')
-    return "unauthorized"
-  }
 
   if (!res.ok) {
     throw new Error("Failed to fetch history")
