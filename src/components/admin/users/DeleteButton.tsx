@@ -23,7 +23,7 @@ const DeleteButton = ({username, deleteSuccess}: DeleteProps) => {
   const handleDelete = async(username: string) => {
     try {
       await deleteAUser(username)
-      toast.success(`User deleted successfully`)
+      toast.success('User deleted successfully')
       setTimeout(() => {
         deleteSuccess()
       }, 2000)

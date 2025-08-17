@@ -5,19 +5,15 @@ export type UsersSchema = {
   lastname: string
   email: string
   username: string
+  role?: string
   createdAt: string
 }
 
-export async function getAllUsers():Promise<UsersSchema[] | "unauthorized"> {
+export async function getAllUsers():Promise<UsersSchema[]> {
   const token = localStorage.getItem('accessToken')
   const res = await fetch(`${API_URL}/api/admin/users`, {
     headers: { 'Authorization': `Bearer ${token}` }
   })
-
-  if (res.status === 401) {
-    localStorage.removeItem('accessToken')
-    return "unauthorized"
-  }
 
   if (!res.ok) {
     throw new Error('Failed to fetch all users')
