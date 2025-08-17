@@ -23,6 +23,7 @@ const BookDetails = ({ book }: BookDetailsProps) => {
             <p className="mb-1"><span className="font-semibold">Year:</span> {book.year}</p>
             <p className="mb-1"><span className="font-semibold">ISBN:</span> {book.isbn}</p>
             <p className="mb-1"><span className="font-semibold">Genre:</span> {book.genre?.join(", ")}</p>
+            <p className="mb-1"><span className="font-semibold">Page:</span> {book.page}</p>
           </div>
           <div className="mt-4 mb-5">
             <h2 className="text-xl font-semibold mb-2">Description</h2>

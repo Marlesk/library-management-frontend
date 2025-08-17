@@ -4,13 +4,13 @@ import RequestButton from "./RequestButton"
 
 type BookCardProps = {
   book: BookSchema
+ 
 }
-
 
 const BookCard = ({ book }: BookCardProps) => {
   return (
     <div className="bg-white rounded-2xl shadow-md flex flex-col p-6 justify-center items-center mb-6">
-      <Link to={`/books/title/${book.title}`} className="flex flex-col items-center pt-4">
+      <Link to={`/books/isbn/${book.isbn}`} className="flex flex-col items-center pt-4">
         <img
           src={book.coverImage}
           alt={book.title}
@@ -22,7 +22,7 @@ const BookCard = ({ book }: BookCardProps) => {
         </p>
       </Link>
 
-      <RequestButton available={book.available} isbn={book.isbn}/>
+      <RequestButton available={book.available} isbn={book.isbn} />
     </div>
   )
 }

@@ -1,25 +1,20 @@
 import { useEffect, useState } from "react"
-import { getBookByTitle } from "./books"
-import { useNavigate, useParams } from "react-router-dom"
-import { toast } from "sonner"
+import { getBookByIsbn } from "./books"
+import { useParams } from "react-router-dom"
 import type { BookSchema } from "./bookSchema"
 import BookDetails from "./BookDetails"
+import LoadingMessage from "@/components/LoadingMessage"
+import ErrorMessage from "@/components/ErrorMessage"
 
 const BookDetailsPage = () => {
   const [book, setBook] = useState<BookSchema | null>(null)
-  const navigate = useNavigate()
   const [loading, setLoading] = useState<boolean>(true)
-  const { title } = useParams()
+  const { isbn } = useParams()
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    getBookByTitle(title)
+    getBookByIsbn(isbn)
       .then((result) => {
-        if (result === "unauthorized") {
-          toast.error('Expired token. Login again')
-          navigate('/auth/login')
-          return 
-        }
         setBook(result)
         setLoading(false)
       })
@@ -27,19 +22,14 @@ const BookDetailsPage = () => {
         setLoading(false)
         setError("Failed to fetch books")
       })
-  }, [title])
+  }, [isbn])
 
-  if (loading) {
-    return <div className="text-center py-20 text-gray-600 min-h-screen">Loading book...</div>
-  }
+   if (loading) return <LoadingMessage message="Loading book..."/>
+    
+   if (error) return <ErrorMessage error={error} />
 
-  if (error || !book) {
-  return (
-      <div className="text-center py-20 text-red-600 min-h-screen">
-        {error}
-      </div>
-    )
-  }
+   if (!book) return null
+  
   
   return (
     <div className="max-w-4xl mx-auto bg-white md:rounded-xl md:shadow-md mb-16 p-6">

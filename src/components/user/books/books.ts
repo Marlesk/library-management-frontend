@@ -2,17 +2,12 @@ import type { BookSchema } from "./bookSchema"
 
 const API_URL: string = import.meta.env.VITE_API_URL
 
-export async function getBooks(): Promise<BookSchema[] | "unauthorized">  {
+export async function getBooks(): Promise<BookSchema[]>  {
   const token = localStorage.getItem('accessToken')
   const res = await fetch(`${API_URL}/api/books`, {
     headers: { 'Authorization': `Bearer ${token}` }
   })
 
-  if (res.status === 401) {
-    localStorage.removeItem('accessToken')
-    return "unauthorized"
-  }
-    
   if (!res.ok) {
     throw new Error("Failed to fetch books")
   }
@@ -22,23 +17,18 @@ export async function getBooks(): Promise<BookSchema[] | "unauthorized">  {
 
 }
 
-export async function getBookByTitle(title: string | undefined): Promise<BookSchema | 'unauthorized'> {
+export async function getBookByIsbn(isbn: string | undefined): Promise<BookSchema> {
   const token = localStorage.getItem('accessToken')
-  const res = await fetch(`${API_URL}/api/books/title/${title}`, {
+  const res = await fetch(`${API_URL}/api/books/isbn/${isbn}`, {
     headers: { 'Authorization': `Bearer ${token}` }
   })
-
-  if (res.status === 401) {
-    localStorage.removeItem('accessToken')
-    return "unauthorized"
-  }
 
   if (!res.ok) {
     throw new Error("Failed to fetch book")
   }
 
   const json = await res.json()
-  return json.data[0]
+  return json.data
 }
 
 export async function requestBorrowBook(isbn: string): Promise<string> {

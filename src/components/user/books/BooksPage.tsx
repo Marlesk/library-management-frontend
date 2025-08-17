@@ -1,11 +1,13 @@
-import { toast, Toaster } from "sonner"
 import { getBooks } from "./books"
 import { useEffect, useState } from "react"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { BooksPagination } from "./BooksPagination"
 import type { BookSchema } from "./bookSchema"
 import BookCard from "./BookCard"
 import { Search } from "lucide-react"
+import LoadingMessage from "@/components/LoadingMessage"
+import ErrorMessage from "@/components/ErrorMessage"
+
 
 const BOOKS_PER_PAGE = 9
 
@@ -15,9 +17,7 @@ const BooksPage = () => {
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
   const [title, setTitle] = useState<string>('')
-  const navigate = useNavigate()
   const currentPage = parseInt(searchParams.get("page") || "1", 10)
-
 
   const filteredBooks = books.filter(book =>
     book.title.toLowerCase().includes(title.toLowerCase()) 
@@ -26,11 +26,6 @@ const BooksPage = () => {
   useEffect(() => {
     getBooks()
       .then((result) => {
-        if (result === "unauthorized") {
-          toast.error('Expired token. Login again')
-          navigate('/auth/login')
-          return 
-        }
         setBooks(result)
         setLoading(false)
       })
@@ -40,17 +35,9 @@ const BooksPage = () => {
       })
   }, [])
 
-  if (loading) {
-    return <div className="text-center py-20 text-gray-600 min-h-screen">Loading books...</div>
-  }
-
- if (error) {
-    return (
-      <div className="text-center py-20 text-red-600 min-h-screen">
-        {error}
-      </div>
-    )
-  }
+  if (loading) return <LoadingMessage message="Loading books..."/>
+    
+  if (error) return <ErrorMessage error={error}/> 
 
   const currentBooks = filteredBooks.slice(
     (currentPage - 1) * BOOKS_PER_PAGE,
@@ -95,8 +82,6 @@ const BooksPage = () => {
         totalPages={totalPages}
         goToPage={goToPage}
       />
-
-      <Toaster duration={3000} expand={true} richColors/> 
     </>
   )
 }

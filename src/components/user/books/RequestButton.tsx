@@ -14,8 +14,9 @@ type RequestButtonProps = {
   isbn: string
 }
 
-const RequestButton = ({ available, isbn }: RequestButtonProps) => {
+const RequestButton = ({ available: initialAvailable, isbn }: RequestButtonProps) => {
   const [message, setMessage] = useState<ReactNode>("")
+  const [available, setAvailable] = useState(initialAvailable)
 
   const handleRequest = async() => {
     try {
@@ -28,6 +29,7 @@ const RequestButton = ({ available, isbn }: RequestButtonProps) => {
           Please use this code at the library to receive your book.
         </>
       )
+      setAvailable(false)
     } catch (error: any) {
       if (error instanceof Error) {
         setMessage(`${error.message}`)

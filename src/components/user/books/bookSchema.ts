@@ -6,6 +6,7 @@ export type BookSchema = {
   isbn: string
   description?: string
   genre?: string[]
+  page?: number
   coverImage?: string
   available?: boolean
 }
