@@ -2,16 +2,11 @@ import type { Profile} from "./profileSchema";
 
 const API_URL: string = import.meta.env.VITE_API_URL
 
-export async function getProfile(): Promise<Profile | "unauthorized"> {
+export async function getProfile(): Promise<Profile > {
   const token = localStorage.getItem('accessToken')
   const res = await fetch( `${API_URL}/api/users/profile`, {
     headers: { 'Authorization': `Bearer ${token}` }
   })
-
-  if (res.status === 401) {
-    localStorage.removeItem('accessToken')
-    return "unauthorized"
-  }
 
   if (!res.ok) {
     throw new Error("Unable to retrieve your profile")
