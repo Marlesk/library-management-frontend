@@ -1,5 +1,6 @@
 import type { Profile } from "@/components/user/profile/profileSchema"
-import ReadOnlyData from "@/components/user/profile/ReadOnlyData"
+import AdminReadOnlyData from "./AdminReadOnly"
+
 
 type ProfileFormProps = {
   data: Profile
@@ -10,11 +11,11 @@ const AdminProfileForm = ({data}: ProfileFormProps) => {
   return (
     <>
       <form className="space-y-4">
-        <ReadOnlyData label="Fisrt Name" value={data.firstname}/>
-        <ReadOnlyData label="Last Name" value={data.lastname}/>
-        <ReadOnlyData label="Email" value={data.email}/>
-        <ReadOnlyData label="username" value={data.username}/>
-        <ReadOnlyData label="Role" value={data.role}/>  
+        <AdminReadOnlyData label="Fisrt Name" value={data.firstname}/>
+        <AdminReadOnlyData label="Last Name" value={data.lastname}/>
+        <AdminReadOnlyData label="Email" value={data.email}/>
+        <AdminReadOnlyData label="username" value={data.username}/>
+        <AdminReadOnlyData label="Role" value={data.role}/>  
       </form>
     </>
   )
