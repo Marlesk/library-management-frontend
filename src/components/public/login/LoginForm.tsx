@@ -61,7 +61,7 @@ const LoginForm = () => {
 
         const decoded = jwtDecode<JWTPayload>(token)
         if (decoded.role === 'admin') {
-          navigate('/admin/users')
+          navigate('/admin/books')
         } else {
           navigate('/books')
         }
