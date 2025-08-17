@@ -1,0 +1,116 @@
+import { useEffect, useState } from "react";
+import { type Borrows, getAllBorrows } from "./borrows";
+import StatusFilter from "./StatusFilter";
+import BorrowCard from "./BorrowCard";
+import { Search } from "lucide-react";
+import RefreshButton from "../RefreshButton";
+import PaginationTable from "../PaginationTable";
+import LoadingMessage from "@/components/LoadingMessage";
+import ErrorMessage from "@/components/ErrorMessage";
+
+const BorrowsPage = () => {
+  const [borrows, setBorrows] = useState<Borrows[] | null>(null)
+  const [filterStatus, setFilterStatus] = useState<'all' | 'requested' | 'borrowed' | 'returned'>('all')
+  const [search, setSearch] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
+ 
+  const RECORDS_PER_PAGE = 10
+
+  const fetchBorrows = async () => {
+    setLoading(true)
+    try {
+      const result = await getAllBorrows()
+      setBorrows(result)
+    } catch {
+      setError('Failed to fetch books records')
+    } finally {
+      setLoading(false)
+    }
+  }
+  
+  useEffect(() => {
+   fetchBorrows()
+  }, [])
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filterStatus, search])
+
+  if (loading) return <LoadingMessage message="Loading books records..." />
+
+  if (error) return <ErrorMessage error="Failed to fetch books records"/>
+
+  if (!borrows) return null
+
+  const filteredRecords = borrows.filter(borrow => {
+    if (filterStatus !== 'all' && borrow.status !== filterStatus) {
+      return false
+    }
+
+    if (filterStatus === 'requested' && search.trim() !== '') {
+      return borrow.borrowCode.toLowerCase().includes(search.toLowerCase());
+    }
+
+    if (filterStatus === 'borrowed' && search.trim() !== '') {
+      return borrow.bookId.isbn.toLowerCase().includes(search.toLowerCase());
+    }
+
+    return true
+  })
+
+  const totalPages = Math.ceil(filteredRecords.length / RECORDS_PER_PAGE)
+  const indexOfLastItem = currentPage * RECORDS_PER_PAGE
+  const indexOfFirstItem = indexOfLastItem - RECORDS_PER_PAGE
+  const paginatedRecords = filteredRecords.slice(indexOfFirstItem, indexOfLastItem)
+
+  return (
+    <div className="mt-6 mb-16 min-h-screen space-y-8">
+      <h1 className="text-3xl font-bold text-admin text-center mb-6">Books Records</h1>
+
+      <StatusFilter activeStatus={filterStatus} onChange={setFilterStatus} />
+       
+      <div className="flex justify-center items-center mb-6 space-x-6">
+        {(filterStatus === 'requested' || filterStatus === 'borrowed') && (
+          <div className="relative">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+              <Search size={18} />
+            </span>
+            <input
+              type="text"
+              placeholder={filterStatus === 'requested' ? "Search by Borrow Code" : "Search by ISBN"}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="md:w-80 w-60 pl-10 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-600"
+            />
+          </div>
+        )}
+        <RefreshButton label="Refresh Records" onClick={fetchBorrows} />
+      </div>
+
+      {paginatedRecords.length === 0 && (
+        <p className="text-center text-gray-500">No records found.</p>
+      )}
+
+      {paginatedRecords.map((borrow, i) => (
+        <BorrowCard index={i} borrow={borrow} 
+          onAccepted={fetchBorrows}/>
+      ))}
+
+       <div className="mr-56">
+        {totalPages > 1 && (
+          <PaginationTable 
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
+        )}
+      </div>
+
+      
+    </div>
+  )
+}
+
+export default BorrowsPage;
