@@ -16,23 +16,24 @@ const ProtectedRoute = ( {children, adminOnly}: ProtectedRouteProps) => {
   const token = localStorage.getItem('accessToken')
 
   if (!token) return <Navigate to="/auth/login" replace/>
+  
    
   try {
     const decoded = jwtDecode<JWTPayload>(token)
 
-    // Έλεγχος λήξης token
     if (decoded.exp * 1000 < Date.now()) {
       localStorage.removeItem("accessToken")
+      sessionStorage.setItem("toastMessage", "Token has expired. Please login again.")
       return <Navigate to="/auth/login" replace />
     }
 
     if (adminOnly && decoded.role !== "admin") {
+      sessionStorage.setItem("toastMessage", "Access denied. Only admin can access this resource")
       return <Navigate to="/books" replace/>
     }
 
     return <>{children}</>
   } catch (error) {
-    console.error("Invalid token", error)
     localStorage.removeItem("accessToken")
     return <Navigate to="/auth/login" replace/>
   }
