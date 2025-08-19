@@ -54,7 +54,7 @@ const UsersPage = () => {
       <div className="p-8 bg-white min-h-screen mb-10">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-3xl font-bold mb-6 text-admin text-center">Users Dashboard</h1>
-          <div className="flex flex-row items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-6">
            <div className="relative">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
                 <Search size={18} />

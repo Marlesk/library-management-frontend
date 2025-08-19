@@ -6,7 +6,7 @@ const AvatarProfile = () => {
         alt="User Avatar"
         className="w-24 h-24 rounded-full mb-2"
       />
-      <h2 className="text-2xl font-semibold text-center text-semi-blue">My Profile</h2>
+      <h2 className="text-3xl font-bold text-center text-semi-blue">My Profile</h2>
     </div>
   )
 }
