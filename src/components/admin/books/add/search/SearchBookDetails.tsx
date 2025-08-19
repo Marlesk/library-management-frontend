@@ -40,6 +40,7 @@ const SearchBookDetails = ({ book, onClose }: BookDetailsProps) => {
         return;
       }
       toast.success("Book added successfully!")
+      onClose()
     } catch (err) {
       toast.error("Something went wrong. Please try again.")
     }
@@ -97,7 +98,7 @@ const SearchBookDetails = ({ book, onClose }: BookDetailsProps) => {
               <strong>Description:</strong> {book.description}</p>
 
             <div className="mt-10 mb-2">
-              <button type="submit" onClick={() => handleSaveBook(book)} className="px-4 py-2 bg-cyan-600 text-white 
+              <button type="button" onClick={() => handleSaveBook(book)} className="px-4 py-2 bg-cyan-600 text-white 
                 cursor-pointer rounded-lg hover:bg-cyan-700">
                 Save Book
               </button>
