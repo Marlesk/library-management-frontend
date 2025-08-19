@@ -24,6 +24,7 @@ import BorrowsPage from './components/admin/borrows/BorrowsPage'
 import AdminBooksPage from './components/admin/books/AdminBooksPage'
 import ViewBookPage from './components/admin/books/view/ViewBookPage'
 import AddBookPage from './components/admin/books/add/AddBookPage'
+import EditPage from './components/admin/books/edit/EditPage'
 
 
 
@@ -95,6 +96,12 @@ function App() {
            <Route path="admin/books" element={
                 <ProtectedRoute adminOnly>
                   <AdminBooksPage />
+                </ProtectedRoute>
+            }/>
+
+            <Route path="admin/books/edit/:isbn" element={
+                <ProtectedRoute adminOnly>
+                  <EditPage/>
                 </ProtectedRoute>
             }/>
 
