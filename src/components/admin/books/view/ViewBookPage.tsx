@@ -20,21 +20,19 @@ const ViewBookPage = () => {
       })
       .catch(() => { 
         setLoading(false)
-        setError("Failed to fetch books")
+        setError("Failed to fetch book")
       })
   }, [isbn])
 
-  if (loading) {
-    return <LoadingMessage message="Loading book..."/>
-  }
-
+  if (loading) return <LoadingMessage message="Loading book..."/>
+  
   if (error) return <ErrorMessage error={error} />
 
   if (!book) return null
 
   
   return (
-    <div className="max-w-4xl mx-auto bg-white md:rounded-xl md:shadow-md mb-16 p-6">
+    <div className="max-w-4xl mx-auto bg-white md:rounded-xl md:shadow-md mb-16 p-6 mt-10">
       <ViewBookDetails book={book}/>
     </div>
   ) 

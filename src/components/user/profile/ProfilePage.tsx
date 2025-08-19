@@ -34,7 +34,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <div className="max-w-md mx-auto mt-2 p-5 mb-24 bg-white shadow-lg rounded-xl">
+      <div className="max-w-md md:max-w-xl mx-auto md:mt-2 mt-10 p-5 mb-24 bg-white md:shadow-lg rounded-xl">
         <AvatarProfile/>
         <ProfileForm data={data}/>
         <DeleteAccountButton/>

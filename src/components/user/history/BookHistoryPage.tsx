@@ -41,8 +41,10 @@ const BookHistoryPage = () => {
   return (
     <>
       <div className="max-w-4xl mx-auto p-4 space-y-8 mb-10 min-h-screen">
-        <h2 className="text-2xl font-semibold mb-6 text-dark-blue text-center">Your Book History</h2>
-        <div className="flex justify-center space-x-4 mb-6">
+        <h1 className="text-3xl font-bold mb-6 mt-10 md:mt-0 text-dark-blue text-center">
+          Your Book History
+        </h1>
+        <div className="flex justify-center flex-wrap gap-3 md:space-x-4 mb-6">
           {['all', 'requested',  'borrowed', 'returned'].map(status => (
             <button
               key={status}
@@ -74,14 +76,13 @@ const BookHistoryPage = () => {
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-gray-800">{entry.bookId.title}</h3>
                     <p className="text-sm text-gray-600 mb-4">by {entry.bookId.author.join(', ')}</p>
-
                     <div className="space-y-2 border-l-2 border-gray-300 pl-4">
-                      <div className="flex items-center space-x-2">
-                        <Barcode size={18} className="w-4 h-4 text-red-700"/>
-                        <span className="text-sm text-gray-700">
-                        <span className="font-medium text-red-700">Borrow Code:</span>{' '}
-                          {entry.borrowCode}
-                        </span>
+                      <div className="flex flex-col md:flex-row md:items-center md:space-x-2">
+                        <div className="flex items-center space-x-2 text-sm">
+                          <Barcode size={18} className="w-4 h-4 text-red-700" />
+                          <span className="font-medium text-red-700">Borrow Code:</span>
+                        </div>
+                        <span className="text-sm text-gray-700">{entry.borrowCode}</span>
                       </div>
 
                       <HistoryDates icon={<Clock size={18}/>} date={entry.createdAt} colorClass="text-yellow-700" label="Requested" />
@@ -101,7 +102,7 @@ const BookHistoryPage = () => {
           )
         }
 
-        <div className="ml-64">
+        <div className="md:ml-64">
           {totalPages > 1 && (
             <PaginationHistory 
               totalPages={totalPages}

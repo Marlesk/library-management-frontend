@@ -33,13 +33,17 @@ const DeleteAccountButton = () => {
   return (
     <>
      <AlertDialog>
-        <AlertDialogTrigger asChild>
+      <div className="flex justify-end">
+         <AlertDialogTrigger asChild>
           <button
-            className="px-10 py-2 mt-8 rounded-xl bg-red-700 text-white hover:bg-red-800 transition cursor-pointer active:bg-red-800 ml-55">
+            className="px-10 py-2 mt-8 rounded-xl bg-red-700 text-white hover:bg-red-800 
+              transition cursor-pointer active:bg-red-800">
             Delete account
           </button> 
-        </AlertDialogTrigger>
-        <AlertDialogContent className="bg-white rounded-lg shadow-xl p-6 max-w-md mx-auto">
+          </AlertDialogTrigger>
+        </div>
+       
+        <AlertDialogContent className="bg-white rounded-lg shadow-xl p-6 md:max-w-md md:mx-auto">
           <AlertDialogHeader>
             <AlertDialogTitle  className="text-lg font-semibold text-gray-900">Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription className="mt-2 text-sm text-gray-600">

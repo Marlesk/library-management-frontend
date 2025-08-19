@@ -15,10 +15,12 @@ const formatDate = (dateStr?: string) => {
 
 const HistoryDates = ({ icon, colorClass, label, date}: HistoryDatesProps) => {
   return (
-    <div className="flex items-center space-x-2">
-      <div className={`w-4 h-4 ${colorClass}`}>{icon}</div>
+    <div className="flex flex-col md:flex-row md:items-center space-x-2">
+      <div className="flex items-center text-sm space-x-2">
+        <div className={`w-4 h-4 ${colorClass}`}>{icon}</div>
+        <span className={`font-medium ${colorClass}`}>{label}:</span>{' '}
+      </div>
       <span className="text-sm text-gray-700">
-      <span className={`font-medium ${colorClass}`}>{label}:</span>{' '}
         {formatDate(date)}
       </span>
     </div>

@@ -6,7 +6,7 @@ type PaginationTableProps = {
 
 const PaginationHistory = ({ totalPages, setCurrentPage, currentPage }: PaginationTableProps) => {
   return (
-      <div className="flex justify-end space-x-2 mt-7">
+      <div className="flex flex-row justify-center md:justify-end space-x-2 mt-7">
         <button
           onClick={() => setCurrentPage((p: number) => Math.max(p - 1, 1))}
           disabled={currentPage === 1}
