@@ -5,9 +5,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { BooksPagination } from "@/components/user/books/BooksPagination";
 import LoadingMessage from "@/components/LoadingMessage";
 import ErrorMessage from "@/components/ErrorMessage";
-import { Plus } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import ViewBookButton from "./view/ViewBookButton";
 import DeleteBookButton from "./delete/DeleteBookButton";
+import EditButton from "./edit/EditButton";
 
 
 const AdminBooksPage = () => {
@@ -15,6 +16,7 @@ const AdminBooksPage = () => {
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
   const [searchParams, setSearchParams] = useSearchParams()
+  const [title, setTitle] = useState<string>('')
   const currentPage = parseInt(searchParams.get("page") || "1", 10)
 
   const BOOKS_PER_PAGE = 12
@@ -43,11 +45,15 @@ const AdminBooksPage = () => {
   
   if (!books) return null
 
-  const totalPages = Math.ceil(books.length / BOOKS_PER_PAGE)
+  const filteredBooks = books.filter(
+    (book) => book.title.toLowerCase().includes(title.toLowerCase()) 
+  )
+
+  const totalPages = Math.ceil(filteredBooks.length / BOOKS_PER_PAGE)
   const indexOfLastItem = currentPage * BOOKS_PER_PAGE
   const indexOfFirstItem = indexOfLastItem - BOOKS_PER_PAGE
 
-  const paginatedBooks = books.slice(indexOfFirstItem, indexOfLastItem)
+  const paginatedBooks = filteredBooks.slice(indexOfFirstItem, indexOfLastItem)
 
   const goToPage = (page: number) => {
     if (page < 1 || page > totalPages) return
@@ -58,13 +64,25 @@ const AdminBooksPage = () => {
   return (
     
     <div className="p-6 max-w-6xl mx-auto min-h-screen">
-      <div className="flex justify-between items-center mb-10">
-        <h1 className="text-3xl font-bold text-admin">Books Management</h1>
-        <button className="px-4 py-2 flex items-center gap-2 bg-cyan-600 text-white 
-          rounded-lg hover:bg-cyan-700 cursor-pointer"
-          onClick={() => navigate("/admin/books/add")}>
-          <Plus size={18}/> Add Book
-        </button>
+        <h1 className="text-3xl font-bold text-admin text-center mb-10">Books Management</h1>
+        <div className="flex justify-between items-center mb-10">
+          <div className="relative">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+              <Search size={18} />
+            </span>
+            <input
+              type="text"
+              placeholder="Search by title..."
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="md:w-80 w-60 pl-10 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-600"
+            />
+          </div>
+          <button className="px-4 py-2 flex items-center gap-2 bg-cyan-600 text-white 
+            rounded-lg hover:bg-cyan-700 cursor-pointer"
+            onClick={() => navigate("/admin/books/add")}>
+            <Plus size={18}/> Add Book
+          </button>
       </div>
 
       <div className="grid grid-cols-3 gap-6">
@@ -89,11 +107,8 @@ const AdminBooksPage = () => {
               </span>
 
               <div className="flex justify-end gap-4 mt-4">
-               <ViewBookButton isbn={book.isbn}/>
-                <button className="px-3 py-1 bg-yellow-500 text-white rounded-lg 
-                 hover:bg-yellow-600 cursor-pointer">
-                  Edit
-                </button>
+                <ViewBookButton isbn={book.isbn}/>
+                <EditButton isbn={book.isbn}/>
                 <DeleteBookButton key={book.isbn} isbn={book.isbn} deleteSuccess={fetchBooks}/>
               </div>
             </div>
