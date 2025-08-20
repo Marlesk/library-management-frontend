@@ -89,14 +89,15 @@ const BorrowsPage = () => {
         <RefreshButton label="Refresh Records" onClick={fetchBorrows} />
       </div>
 
-      {paginatedRecords.length === 0 && (
+      {paginatedRecords.length === 0 ? 
+      (
         <p className="text-center text-gray-500">No records found.</p>
+      ) : (
+        paginatedRecords.map((borrow, i) => (
+          <BorrowCard index={i} borrow={borrow} 
+            onAccepted={fetchBorrows}/>
+        ))
       )}
-
-      {paginatedRecords.map((borrow, i) => (
-        <BorrowCard index={i} borrow={borrow} 
-          onAccepted={fetchBorrows}/>
-      ))}
 
        <div className="mr-56">
         {totalPages > 1 && (
@@ -107,8 +108,6 @@ const BorrowsPage = () => {
           />
         )}
       </div>
-
-      
     </div>
   )
 }
