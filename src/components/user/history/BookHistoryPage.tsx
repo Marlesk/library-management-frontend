@@ -60,7 +60,7 @@ const BookHistoryPage = () => {
         
         {paginatedBooks.length === 0 ? 
           (
-            <p className="text-center py-6 text-gray-500 min-h-screen">No books found.</p>
+            <p className="text-center py-6 text-lg text-gray-500 min-h-screen">No books found</p>
           ) : 
           (
             paginatedBooks.map((entry) => ( 

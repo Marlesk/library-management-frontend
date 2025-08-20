@@ -116,11 +116,12 @@ const AdminBooksPage = () => {
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-500 py-6">
-            No books found
-          </p>
+         <div className="col-span-3 flex justify-center py-6">
+          <p className="text-center text-gray-500 text-lg">No books found</p>
+        </div>
         )}
       </div>
+      
       <div className="mt-10">
         {totalPages > 1 && (
           <BooksPagination 

@@ -82,9 +82,9 @@ const UsersPage = () => {
               </tr>
             </thead>
             <tbody>
-              {paginatedUsers.length === 0 ? (
+             {paginatedUsers.filter(user => user.role !== 'admin').length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="text-center py-6 text-gray-500">
+                  <td colSpan={6} className="text-center py-6 text-lg text-gray-500">
                     No users found
                   </td>
                 </tr>

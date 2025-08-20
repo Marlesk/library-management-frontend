@@ -72,16 +72,23 @@ const BooksPage = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:p-20 p-10 min-h-screen">
-        {currentBooks.map((book) => (
-          <BookCard key={book.isbn} book={book} />
-        ))}
+        {currentBooks.length > 0 ? (
+          currentBooks.map((book) => (
+            <BookCard key={book.isbn} book={book} />
+          ))
+        ) : (
+          <div className="col-span-3 flex justify-center">
+            <p className="text-gray-500 text-lg">No books found</p>
+          </div>
+        )}
       </div>
-
-      <BooksPagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        goToPage={goToPage}
-      />
+      {totalPages > 1 && (
+        <BooksPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          goToPage={goToPage}
+        />
+      )}
     </>
   )
 }

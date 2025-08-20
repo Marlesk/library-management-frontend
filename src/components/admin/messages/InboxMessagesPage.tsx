@@ -69,7 +69,7 @@ const InboxMessagesPage = () => {
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-500 py-6">
+          <p className="text-center text-gray-500 py-6 text-lg">
             No messages found
           </p>
         )}

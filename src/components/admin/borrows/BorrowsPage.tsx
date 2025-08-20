@@ -91,7 +91,14 @@ const BorrowsPage = () => {
 
       {paginatedRecords.length === 0 ? 
       (
-        <p className="text-center text-gray-500">No records found.</p>
+       <div className="col-span-3 flex justify-center py-6">
+          <p className="text-center text-gray-500 text-lg">
+            {filterStatus === "requested" && "No requested records found"}
+            {filterStatus === "borrowed" && "No borrowed records found"}
+            {filterStatus === "returned" && "No returned records found"}
+            {filterStatus === "all" && "No records found"}
+          </p>
+        </div>
       ) : (
         paginatedRecords.map((borrow, i) => (
           <BorrowCard index={i} borrow={borrow} 
