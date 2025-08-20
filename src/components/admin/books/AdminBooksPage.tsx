@@ -85,6 +85,10 @@ const AdminBooksPage = () => {
           </button>
       </div>
 
+       {paginatedBooks.length === 0 && (
+          <p className="text-center text-gray-500">No books found.</p>
+        )}
+
       <div className="grid grid-cols-3 gap-6">
         {paginatedBooks.map((book) => (
           <div key={book.isbn} className="bg-white shadow rounded-lg mb-3">
