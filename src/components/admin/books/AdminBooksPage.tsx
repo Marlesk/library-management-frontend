@@ -85,51 +85,51 @@ const AdminBooksPage = () => {
           </button>
       </div>
 
-       {paginatedBooks.length === 0 ? (
-          <p className="text-center text-gray-500">No books found.</p>
-        ) : (
-          <div className="grid grid-cols-3 gap-6">
-            {paginatedBooks.map((book) => (
-              <div key={book.isbn} className="bg-white shadow rounded-lg mb-3">
+      <div className="grid grid-cols-3 gap-6">
+        {paginatedBooks.length > 0 ? (
+          paginatedBooks.map((book) => (
+            <div key={book.isbn} className="bg-white shadow rounded-lg mb-3">
               <div className="flex justify-center mt-5">
-                  <img
-                    src={book.coverImage}
-                    alt={book.title}
-                    className="w-40 h-60 object-cover rounded-xl mb-4"
-                  />
-                </div>
-                <div className="p-4">
-                  <h2 className="text-lg font-semibold">{book.title}</h2>
-                  <p className="text-gray-600">{book.author}</p>
-                  <span
-                    className={`inline-block mt-2 px-2 py-1 text-xs rounded-full ${
-                      book.available ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {book.available ? "Available" : "Not Available"}
-                  </span>
+                <img
+                  src={book.coverImage}
+                  alt={book.title}
+                  className="w-40 h-60 object-cover rounded-xl mb-4"
+                />
+              </div>
+              <div className="p-4">
+                <h2 className="text-lg font-semibold">{book.title}</h2>
+                <p className="text-gray-600">{book.author}</p>
+                <span
+                  className={`inline-block mt-2 px-2 py-1 text-xs rounded-full ${
+                    book.available ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                  }`}
+                >
+                  {book.available ? "Available" : "Not Available"}
+                </span>
 
-                  <div className="flex justify-end gap-4 mt-4">
-                    <ViewBookButton isbn={book.isbn}/>
-                    <EditButton isbn={book.isbn}/>
-                    <DeleteBookButton key={book.isbn} isbn={book.isbn} deleteSuccess={fetchBooks}/>
-                  </div>
+                <div className="flex justify-end gap-4 mt-4">
+                  <ViewBookButton isbn={book.isbn}/>
+                  <EditButton isbn={book.isbn}/>
+                  <DeleteBookButton key={book.isbn} isbn={book.isbn} deleteSuccess={fetchBooks}/>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-500 py-6">
+            No books found
+          </p>
         )}
+      </div>
+      <div className="mt-10">
         {totalPages > 1 && (
-          <div className="mt-10">
-            <BooksPagination 
-              totalPages={totalPages}
-              goToPage={goToPage}
-              currentPage={currentPage}
-            /> 
-          </div>
+          <BooksPagination 
+            totalPages={totalPages}
+            goToPage={goToPage}
+            currentPage={currentPage}
+          /> 
         )}
-     
-      
+      </div>
     </div>
   )
 }
