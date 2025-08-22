@@ -10,7 +10,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { deleteAUser } from "./users"
 import { toast } from "sonner"
 
 type DeleteProps = {
@@ -18,11 +17,24 @@ type DeleteProps = {
   deleteSuccess: () => void
 }
 
+const API_URL =  import.meta.env.VITE_API_URL
+
 const DeleteButton = ({username, deleteSuccess}: DeleteProps) => {
 
   const handleDelete = async(username: string) => {
     try {
-      await deleteAUser(username)
+      const token = localStorage.getItem('accessToken')
+      const res = await fetch(`${API_URL}/api/admin/users/username/${username}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+
+      const data = await res.json()
+      
+      if (!res.ok) {
+        toast.error(data.errors || 'Failed to delete the user')
+        return
+      }
       toast.success('User deleted successfully')
       setTimeout(() => {
         deleteSuccess()
