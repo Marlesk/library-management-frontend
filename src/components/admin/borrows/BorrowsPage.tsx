@@ -44,7 +44,20 @@ const BorrowsPage = () => {
 
   if (!borrows) return null
 
-  const filteredRecords = borrows.filter(borrow => {
+  const sortedRecords = [...borrows].sort((a, b) => {
+    if (filterStatus === 'requested') {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    }
+    if (filterStatus === 'borrowed') {
+      return new Date(b.borrowDate).getTime() - new Date(a.borrowDate).getTime()
+    }
+    if (filterStatus === 'returned') {
+      return new Date(b.returnDate).getTime() - new Date(a.returnDate).getTime()
+    }
+    return 0
+  })
+
+  const filteredRecords = sortedRecords.filter(borrow => {
     if (filterStatus !== 'all' && borrow.status !== filterStatus) {
       return false
     }
@@ -101,7 +114,7 @@ const BorrowsPage = () => {
         </div>
       ) : (
         paginatedRecords.map((borrow, i) => (
-          <BorrowCard index={i} borrow={borrow} 
+          <BorrowCard key={borrow._id} index={i} borrow={borrow} 
             onAccepted={fetchBorrows}/>
         ))
       )}
