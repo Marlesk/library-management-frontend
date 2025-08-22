@@ -62,8 +62,8 @@ const BorrowCard = ({borrow, index, onAccepted }: BorrowCardProps) => {
         <div className="bg-gradient-to-r from-admin to-cyan-600 p-4 rounded-lg shadow-inner 
             flex items-center gap-4">
           <div>
-            <h2 className="text-lg font-bold text-white">{borrow.userId.firstname} {borrow.userId.lastname}</h2>
-            <p className="text-gray-700">{borrow.userId.email}</p>
+            <h2 className="text-lg font-bold text-white">{borrow.userId?.firstname || "Deleted User"} {borrow.userId?.lastname || ""}</h2>
+            <p className="text-gray-700">{borrow.userId?.email || ""}</p>
           </div>
         </div>
       </div>

@@ -56,7 +56,6 @@ const EditPage = () => {
       setBook(result)
       toast.success('Book updated successfully')
       navigate(-1)
-      navigate('/admin/books')
     } catch (error) {
       toast.error('Failed to update book')
     }

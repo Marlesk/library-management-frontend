@@ -28,8 +28,8 @@ const UsersPage = () => {
 
   const paginatedUsers = filteredUsers.slice(indexOfFirstItem, indexOfLastItem)
 
-  const fetchUsers = async () => {
-    setLoading(true)
+  const fetchUsers = async (showLoading = true) => {
+    if (showLoading) setLoading(true)
     try {
       const result = await getAllUsers()
       setUsers(result)
@@ -41,7 +41,7 @@ const UsersPage = () => {
   }
 
   useEffect(() => {
-    fetchUsers()
+    fetchUsers(true)
   }, [])
     
 
@@ -100,7 +100,8 @@ const UsersPage = () => {
                     <td className="border border-gray-200 px-4 py-3">{user.username}</td>
                     <td className="border border-gray-200 px-4 py-3">{formatDate(user.createdAt)}</td>
                     <td className="border border-gray-200 px-4 py-3 text-center">
-                     <DeleteButton key={user.username} username={user.username} deleteSuccess={fetchUsers}/>
+                     <DeleteButton key={user.username} username={user.username} 
+                      deleteSuccess={() => fetchUsers(false)}/>
                     </td>
                   </tr>
                 )) 

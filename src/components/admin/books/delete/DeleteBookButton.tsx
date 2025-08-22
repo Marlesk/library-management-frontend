@@ -29,7 +29,7 @@ const DeleteBookButton = ({ isbn, deleteSuccess }: DeleteProps) => {
       })
 
       if (!res.ok) {
-        toast.error('Failed to delete the user')
+        toast.error('Failed to delete the book')
       }
 
       toast.success('Book deleted successfully')

@@ -18,8 +18,8 @@ const BorrowsPage = () => {
  
   const RECORDS_PER_PAGE = 10
 
-  const fetchBorrows = async () => {
-    setLoading(true)
+  const fetchBorrows = async (showLoading = true) => {
+    if (showLoading) setLoading(true)
     try {
       const result = await getAllBorrows()
       setBorrows(result)
@@ -31,7 +31,7 @@ const BorrowsPage = () => {
   }
   
   useEffect(() => {
-   fetchBorrows()
+   fetchBorrows(true)
   }, [])
 
   useEffect(() => {
@@ -115,7 +115,7 @@ const BorrowsPage = () => {
       ) : (
         paginatedRecords.map((borrow, i) => (
           <BorrowCard key={borrow._id} index={i} borrow={borrow} 
-            onAccepted={fetchBorrows}/>
+            onAccepted={() => fetchBorrows(false)}/>
         ))
       )}
 

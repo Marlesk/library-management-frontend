@@ -23,8 +23,8 @@ const AdminBooksPage = () => {
 
   const navigate = useNavigate()
 
-  const fetchBooks = async() => {
-    setLoading(true)
+  const fetchBooks = async(showLoading = true) => {
+    if (showLoading) setLoading(true)
       try {
         const result = await getBooks()
         setBooks(result)
@@ -36,7 +36,7 @@ const AdminBooksPage = () => {
   }
 
   useEffect(() => {
-    fetchBooks()
+    fetchBooks(true)
   }, [])
 
   if (loading) return <LoadingMessage message="Loading books..."/>
@@ -110,7 +110,8 @@ const AdminBooksPage = () => {
                 <div className="flex justify-end gap-4 mt-4">
                   <ViewBookButton isbn={book.isbn}/>
                   <EditButton isbn={book.isbn}/>
-                  <DeleteBookButton key={book.isbn} isbn={book.isbn} deleteSuccess={fetchBooks}/>
+                  <DeleteBookButton key={book.isbn} isbn={book.isbn} 
+                    deleteSuccess={() => fetchBooks(false)}/>
                 </div>
               </div>
             </div>
