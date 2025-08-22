@@ -11,10 +11,6 @@ This application provides a user-friendly interface for both **users** and a sin
 
 ## ✨ Features
 
-### 📱 Responsive design 
-  - User dashboard works on both desktop and mobile.  
-  - Admin dashboard is optimized for desktop only.
-
 ### 👤 User
 - Register and Login (supports **Google Login**).
 - View detailed book information (availability, metadata).
@@ -38,6 +34,10 @@ This application provides a user-friendly interface for both **users** and a sin
   - Update status from Borrow → Return using ISBN
 - View all messages from the contact form.
 - View own profile (cannot edit or delete).
+
+### 📱 Responsive design 
+  - User dashboard works on both desktop and mobile.  
+  - Admin dashboard is optimized for desktop only.
 
 ---
 
@@ -91,11 +91,11 @@ A **demo database** is provided to let you explore the application safely.
   - Password: `Demo123!`
 - All other data (books, users) is **not pre-filled**, so you will need to:
   - Add books manually or via Google API
-  - Register user accounts
+  - Register user accounts 
   - Make requests and test features
 - The **demo database resets every 3 days**, so all data except the demo admin will be deleted automatically.
 
-👉 Link to live demo: [Demo Frontend](https://your-demo-url.vercel.app)
+👉 Link to live demo: [Demo Frontend](https://libraryappdemofrontend.vercel.app)
 
 ## 🚀 Production Environment
 
@@ -109,7 +109,7 @@ A **demo database** is provided to let you explore the application safely.
   - Make a request (borrow)
 - Users **cannot see or edit admin data**.
 
-👉 Link to production: [Production Frontend](https://your-production-url.vercel.app)
+👉 Link to production: [Production Frontend](https://libraryappfrontend.vercel.app)
 
 ## 🔗 Related Projects
 
