@@ -11,7 +11,7 @@ This application provides a user-friendly interface for both **users** and a sin
 
 ## ✨ Features
 
-- 📱 **Responsive design**:  
+### 📱 Responsive design 
   - User dashboard works on both desktop and mobile.  
   - Admin dashboard is optimized for desktop only.
 
@@ -82,11 +82,34 @@ VITE_API_URL = your-backend-api-url
 VITE_GOOGLE_CLIENT_ID = your-google-client-id
 ```
 
-## 🌍 Deployment
+## 🧪 Demo Database
 
-The frontend is deployed on Vercel:
+A **demo database** is provided to let you explore the application safely.
 
-👉 Live Demo
+- The **demo admin account** is already created:
+  - Username: `admin`
+  - Password: `Demo123!`
+- All other data (books, users) is **not pre-filled**, so you will need to:
+  - Add books manually or via Google API
+  - Register user accounts
+  - Make requests and test features
+- The **demo database resets every 3 days**, so all data except the demo admin will be deleted automatically.
+
+👉 Link to live demo: [Demo Frontend](https://your-demo-url.vercel.app)
+
+## 🚀 Production Environment
+
+- The production environment connects to the **real library database**.  
+- A **real admin** already exists, but credentials are **not shared**.  
+- Books already exist in the database.  
+- Users can only:
+  - Register new account
+  - Log in
+  - View available books
+  - Make a request (borrow)
+- Users **cannot see or edit admin data**.
+
+👉 Link to production: [Production Frontend](https://your-production-url.vercel.app)
 
 ## 🔗 Related Projects
 
