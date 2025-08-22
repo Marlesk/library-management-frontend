@@ -1,69 +1,100 @@
-# React + TypeScript + Vite
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 📚 Library Management Frontend
 
-Currently, two official plugins are available:
+Frontend for the **Library Management System**, built with **React.js (Vite)**.  
+This application provides a user-friendly interface for both **users** and a single **admin**, interacting with the backend API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 📱 **Responsive design**:  
+  - User dashboard works on both desktop and mobile.  
+  - Admin dashboard is optimized for desktop only.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 👤 User
+- Register and Login (supports **Google Login**).
+- View detailed book information (availability, metadata).
+- Request **one book at a time** and receive a **borrow code** to collect it from the library.
+- Track borrowing history (Requested → Borrowed → Returned).
+- Manage profile:
+  - Update email
+  - Delete account
+- Send messages via the **contact form** (no login required).
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 🛠️ Admin
+- **Single admin user** (predefined in the database).
+- Manage books:
+  - Add manually or via **Google Books API**
+  - View, edit, delete, and search by title
+- Manage users:
+  - View and search users (by username/email)
+  - Delete accounts
+- Manage borrowing requests:
+  - Approve requests with borrow code (Request → Borrow)
+  - Update status from Borrow → Return using ISBN
+- View all messages from the contact form.
+- View own profile (cannot edit or delete).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## ⚙️ Installation & Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Marlesk/library-management-frontend.git
+cd library-management-frontend
+```
+Install dependencies:
+
+``` bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Run development server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+``` bash
+# Development
+npm run dev
 ```
+
+Build for production:
+
+``` bash
+npm run build
+```
+
+Preview production build:
+
+``` bash
+npm run preview
+```
+
+## 🔑 Environment Variables
+
+Create a .env file in the root directory and add the following:
+
+``` bash
+
+VITE_API_URL=your-backend-api-url
+VITE_GOOGLE_CLIENT_ID=your-google-client-id
+```
+
+## 🌍 Deployment
+
+The frontend is deployed on Vercel:
+
+👉 Live Demo
+
+## 🔗 Related Projects
+
+- 📦  [Library Management Backend](https://github.com/Marlesk/library-management-backend.git)
+
+## 👨‍💻 Author
+
+Developed by **Maria Leska**.
+Feel free to connect or open issues in this repository.
