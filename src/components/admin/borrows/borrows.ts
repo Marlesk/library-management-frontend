@@ -1,6 +1,7 @@
 type BorrowStatus =  "requested" | "borrowed" | "returned"
 
 export type Borrows = {
+  _id: string
   userId: {
     firstname: string,
     lastname: string,
