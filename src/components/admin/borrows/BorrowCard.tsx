@@ -2,7 +2,7 @@ import { Barcode, BookOpen, CheckCircle, Clock } from "lucide-react"
 import type { Borrows } from "./borrows"
 import HistoryDates from "@/components/user/history/HistoryDates"
 import BorrowButton from "./BorrowButton"
-import RequestButton from "./ReturnButton"
+import ReturnButton from "./ReturnButton"
 
 type BorrowCardProps = {
   index: number
@@ -51,7 +51,7 @@ const BorrowCard = ({borrow, index, onAccepted }: BorrowCardProps) => {
                     onAccepted={onAccepted}/>
                 )}
                 {borrow.status === 'borrowed' && (
-                   <RequestButton isbn={borrow.bookId.isbn} 
+                   <ReturnButton isbn={borrow.bookId.isbn} 
                     onReturned={onAccepted}/>
                   )}
               </div>  

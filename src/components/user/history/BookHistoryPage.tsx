@@ -66,15 +66,15 @@ const BookHistoryPage = () => {
             paginatedBooks.map((entry) => ( 
               <div key={entry._id} className="bg-white shadow-lg rounded-xl p-6">
                 <div className="flex items-start space-x-5">
-                  {entry.bookId.coverImage && (
+                  {entry.bookId?.coverImage && (
                     <img
-                      src={entry.bookId.coverImage}
-                      alt={entry.bookId.title}
+                      src={entry.bookId?.coverImage}
+                      alt={entry.bookId?.title}
                       className="w-20 h-28 object-cover rounded-md shadow-sm"
                     />
                   )}
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-800">{entry.bookId.title}</h3>
+                    <h3 className="text-lg font-semibold text-gray-800">{entry.bookId.title }</h3>
                     <p className="text-sm text-gray-600 mb-4">by {entry.bookId.author.join(', ')}</p>
                     <div className="space-y-2 border-l-2 border-gray-300 pl-4">
                       <div className="flex flex-col md:flex-row md:items-center md:space-x-2">
