@@ -28,10 +28,12 @@ const DeleteBookButton = ({ isbn, deleteSuccess }: DeleteProps) => {
         headers: { 'Authorization': `Bearer ${token}` }
       })
 
+      const data = await res.json()
+      
       if (!res.ok) {
-        toast.error('Failed to delete the book')
+        toast.error(data.errors || 'Failed to delete the book')
+        return
       }
-
       toast.success('Book deleted successfully')
       setTimeout(() => {
         deleteSuccess()
