@@ -1,8 +1,8 @@
+# 📚 Library Management Frontend
+
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
-
-# 📚 Library Management Frontend
 
 Frontend for the **Library Management System**, built with **React.js (Vite)**.  
 This application provides a user-friendly interface for both **users** and a single **admin**, interacting with the backend API.
@@ -58,7 +58,6 @@ npm install
 Run development server:
 
 ``` bash
-# Development
 npm run dev
 ```
 
@@ -78,10 +77,9 @@ npm run preview
 
 Create a .env file in the root directory and add the following:
 
-``` bash
-
-VITE_API_URL=your-backend-api-url
-VITE_GOOGLE_CLIENT_ID=your-google-client-id
+``` env
+VITE_API_URL = your-backend-api-url
+VITE_GOOGLE_CLIENT_ID = your-google-client-id
 ```
 
 ## 🌍 Deployment
@@ -92,7 +90,7 @@ The frontend is deployed on Vercel:
 
 ## 🔗 Related Projects
 
-- 📦  [Library Management Backend](https://github.com/Marlesk/library-management-backend.git)
+- [Library Management Backend](https://github.com/Marlesk/library-management-backend.git)
 
 ## 👨‍💻 Author
 
