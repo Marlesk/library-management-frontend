@@ -18,7 +18,7 @@ type RequestButtonProps = {
 }
 
 
-const RequestButton = ({ isbn, onReturned }: RequestButtonProps) => {
+const ReturnButton = ({ isbn, onReturned }: RequestButtonProps) => {
 
   const handleConfirm = async(isbn: string) => {
     try {
@@ -58,4 +58,4 @@ const RequestButton = ({ isbn, onReturned }: RequestButtonProps) => {
   )
 }
 
-export default RequestButton
+export default ReturnButton
