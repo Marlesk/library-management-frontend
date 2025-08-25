@@ -25,7 +25,8 @@ const InputForm = () => {
     register,
     handleSubmit,
     formState: {errors},
-    setError
+    setError,
+    reset
   } = useForm<addBooksValues>({
     resolver: zodResolver(AddBookSchema),
     defaultValues: initialValues,
@@ -70,7 +71,7 @@ const InputForm = () => {
       }
 
       toast.success('Book added successfully')
-
+      reset()
     } catch (error) {
       toast.error("Something went wrong. Please try again.")
     }
