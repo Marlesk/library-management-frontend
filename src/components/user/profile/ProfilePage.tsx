@@ -7,12 +7,11 @@ import DeleteAccountButton from "./DeleteAccountButton"
 import LoadingMessage from "@/components/LoadingMessage"
 import ErrorMessage from "@/components/ErrorMessage"
 
-
 const ProfilePage = () => {
   const [data, setData] = useState<Profile | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  
+
   useEffect(() => {
     getProfile()
       .then((result) => { setData(result) })
@@ -23,7 +22,6 @@ const ProfilePage = () => {
         setLoading(false)
       })
   }, [])
-
 
   if (loading) return <LoadingMessage message="Loading profile..."/>
     
