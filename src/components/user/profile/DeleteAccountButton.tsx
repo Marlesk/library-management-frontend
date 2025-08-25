@@ -9,16 +9,32 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { deleteAccouct } from "./profile"
 import { useNavigate } from "react-router-dom"
 import { toast} from "sonner"
+
+const API_URL: string = import.meta.env.VITE_API_URL
 
 const DeleteAccountButton = () => {
   const navigate = useNavigate()
 
   const handleDelete = async() => {
     try {
-      await deleteAccouct()
+      const token = localStorage.getItem('accessToken')
+      const res = await fetch(`${API_URL}/api/users/profile`, { 
+        method:"DELETE",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` 
+        }
+      })
+
+      const data = await res.json()
+      
+      if (!res.ok) {
+        toast.error(data.errors || 'Failed to delete account')
+        return
+      }
+      
       localStorage.removeItem("accessToken")
       toast.success('Account deleted successfully')
       setTimeout(() => {
