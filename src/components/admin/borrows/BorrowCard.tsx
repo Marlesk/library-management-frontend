@@ -15,15 +15,15 @@ const BorrowCard = ({borrow, index, onAccepted }: BorrowCardProps) => {
     <div key={index} className="max-w-4xl mx-auto rounded-xl shadow-xl overflow-hidden bg-gradient-to-r from-blue-50 to-yellow-50 p-1 hover:shadow-2xl transition-shadow">
       <div className="bg-white rounded-xl p-6 flex flex-col gap-6">
         <div className="flex gap-4">
-          <img src={borrow.bookId.coverImage} alt={borrow.bookId.title}
+          <img src={borrow.bookId?.coverImage} alt={borrow.bookId?.title}
             className="w-32 h-48 object-cover rounded-lg shadow-lg mt-2"
           />
 
           <div className="flex-1 flex flex-col justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-admin">{borrow.bookId.title}</h2>
-              <p className="text-gray-600 italic">{borrow.bookId.author.join(', ')}</p>
-              <p className="text-sm text-gray-500 mt-1">ISBN: {borrow.bookId.isbn}</p>
+              <h2 className="text-2xl font-bold text-admin">{borrow.bookId?.title || "Book does not exist"}</h2>
+              <p className="text-gray-600 italic">{borrow.bookId?.author.join(', ') || ""}</p>
+              <p className="text-sm text-gray-500 mt-1">ISBN: {borrow.bookId?.isbn || ""}</p>
             </div>
 
             <div className="space-y-2 border-l-2 border-gray-300 pl-4 mt-2">
