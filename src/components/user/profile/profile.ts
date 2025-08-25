@@ -52,7 +52,6 @@ export async function deleteAccouct(): Promise<void> {
     throw new Error("Failed to delete account")
   }
 
-  return
-
+  return 
 
 }
