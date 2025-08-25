@@ -133,8 +133,16 @@ const InputForm = () => {
         register={register('description')}
         error={errors.description}
       />
-     
-      <SaveButton/>
+
+      <div className="flex justify-between mb-5">
+        <SaveButton/>
+
+        <button type="button" className="px-4 py-2 bg-gray-500 text-white 
+          cursor-pointer rounded-lg hover:bg-gray-600" onClick={() => reset()}>
+          Clear All
+        </button>
+     </div> 
+      
     </form>
   )
 }
