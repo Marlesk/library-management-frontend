@@ -65,7 +65,10 @@ const BooksPage = () => {
               type="text"
               placeholder="Search by title..."
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => {
+                setTitle(e.target.value)
+                setSearchParams({ page: "1" })
+              }}
               className="border border-gray-300 rounded-lg pl-10 pr-4 py-2 w-full focus:outline-2 focus:-outline-offset-2 focus:outline-dark-blue"
             />
           </div>

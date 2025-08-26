@@ -74,7 +74,10 @@ const AdminBooksPage = () => {
               type="text"
               placeholder="Search by title..."
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => { 
+                setTitle(e.target.value)
+                setSearchParams({ page: "1" })
+              }}
               className="md:w-80 w-60 pl-10 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-600"
             />
           </div>

@@ -64,7 +64,10 @@ const UsersPage = () => {
                 value={search}
                 placeholder="Search by email or username"
                 className="md:w-80 w-60 pl-10 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-600"
-                onChange={(el) => setSearch(el.target.value)}
+                onChange={(el) => {
+                  setSearch(el.target.value)
+                  setCurrentPage(1)
+                }}
               />
             </div>
             <RefreshButton label="Refresh Users" onClick={fetchUsers}/>
